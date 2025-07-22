@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            background-image: url('https://media.wired.com/photos/648ce85eeb3f06fa8140d00a/4:3/w_2132,h_1599,c_limit/Best-Websites-To-Show-Off-Your-Portfolio-Business-1357904435.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .calculator {
+            background-color: #2c2c2c;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #444;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        #display {
+            width: 100%;
+            height: 80px;
+            background-color: #4a4a4a;
+            color: #ffffff;
+            font-size: 3em;
+            text-align: right;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 12px 18px;
+            box-sizing: border-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .calculator button {
+            width: 100%;
+            height: 80px;
+            font-size: 2.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: #555555;
+            color: #ffffff;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            outline: none;
+        }
+
+        .calculator button:hover {
+            background-color: #777777;
+            transform: translateY(-2px);
+        }
+
+        .calculator button:active {
+            transform: translateY(0);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .calculator button.operator {
+            background-color: #ff9f0a;
+        }
+
+        .calculator button.operator:hover {
+            background-color: #e68f09;
+        }
+
+        .calculator button.clear {
+            background-color: #cc3333;
+        }
+
+        .calculator button.clear:hover {
+            background-color: #b32b2b;
+        }
+
+        .calculator button.zero {
+            grid-column: span 2;
+        }
+
+        .calculator button.equal {
+            grid-row: span 2;
+            height: auto;
+            background-color: #007bff;
+            font-size: 2.5em;
+        }
+
+        .calculator button.equal:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" readonly>
+        <div class="buttons">
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button class="operator" onclick="appendToDisplay('/')">/</button>
+            <button class="operator" onclick="appendToDisplay('*')">*</button>
+            <button class="operator" onclick="appendToDisplay('-')">-</button>
+
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button class="operator" onclick="appendToDisplay('+')">+</button>
+
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button class="equal" onclick="calculateResult()">=</button>
+
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+
+            <button class="zero" onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button class="v-symbol" disabled>𝑽</button>
+
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+
+        function appendToDisplay(input) {
+            display.value += input;
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function calculateResult() {
+            try {
+                display.value = eval(display.value);
+            } catch {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
